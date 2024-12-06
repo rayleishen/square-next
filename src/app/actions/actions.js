@@ -9,7 +9,7 @@ BigInt.prototype.toJSON = function () {
 
 const { paymentsApi } = new Client({
   accessToken: process.env.SQUARE_ACCESS_TOKEN,
-  environment: "sandbox",
+  environment: "production",
 });
 
 export async function submitPayment(sourceId) {
@@ -19,7 +19,7 @@ export async function submitPayment(sourceId) {
       sourceId,
       amountMoney: {
         currency: "CAD",
-        amount: 100,
+        amount: 1,
       },
     });
     return result;

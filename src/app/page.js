@@ -4,8 +4,8 @@ import { submitPayment } from "./actions/actions";
 
 export default function Home() {
   // Replace with your application ID and location ID
-  const appId = "sandbox-sq0idb-ayXDRhsJiwimurKk9RNYcA";
-  const locationId = "LXV6Q4QQXQFCT";
+  const appId = "sq0idp-z69enspv1J3r73uJYyQ0Ag";
+  const locationId = "L4XV1SXY1ECJY";
 
   return (
     <PaymentForm
