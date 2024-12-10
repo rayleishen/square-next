@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Accept Payments with Next.js App Router",
+  title: "Second Savour Payments Subdomain",
 };
 
 export default function RootLayout({ children }) {
