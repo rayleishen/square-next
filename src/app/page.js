@@ -35,17 +35,39 @@ export default function Home() {
     quantity: 1,
   });
 
+  const [warningMessage, setWarningMessage] = useState('');
+
+  // Handle form data changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  // Check if all fields are filled out
+  const areFieldsFilled = () => {
+    return orderDetails.name && orderDetails.email && orderDetails.phone && orderDetails.address && orderDetails.quantity; // Add more conditions if there are more fields
+  };
+
   const calculateCharge = (quantity) => Math.round(6.99 * quantity * 100);
 
   const handleSubmitOrder = async () => {
-    console.log("Total amount to charge:", calculateCharge(orderDetails.quantity));
-    await sendOrderEmail(orderDetails); // Send the email after submitting the order
-    setStep(2);
+
+    if (areFieldsFilled()) {
+      // Proceed with order submission
+      console.log('Form submitted');
+      setWarningMessage('Please fill out all fields');
+      console.log("Total amount to charge:", calculateCharge(orderDetails.quantity));
+      await sendOrderEmail(orderDetails); //< -- turn this shit off when testing
+      setStep(2);
+    } else {
+      // Show warning message if fields are not filled
+      setWarningMessage('Please fill out all fields!');
+    }
   };
 
   const renderOrderDetails = () => (
     <div style={{ backgroundColor: '#f0f0f0', height: '100vh' }}>
-      <img src="/images/SecondSavour_Banner.png" alt="Logo" style={{ maxWidth: '100%', height: 'auto' }} />
+      <img src="/images/SecondSavour_Banner.png" alt="Logo" style={{ minWidth: '100%', maxWidth: '100%', height: 'auto' }} />
       <h2 className="order-header">Order Details</h2>
       <form className="order-form">
         <div className="form-group">
@@ -102,6 +124,13 @@ export default function Home() {
             }
           />
         </div>
+
+        
+        {/* Warning message */}
+        {warningMessage && <p style={{ color: 'red' }}>{warningMessage}</p>}
+
+        {/* Submit Button */}
+
         <button
           type="button"
           onClick={handleSubmitOrder}
@@ -151,6 +180,14 @@ export default function Home() {
           textarea {
             resize: vertical;
           }
+          body {
+            padding: 0px;
+            margin:0px;
+          }
+          html {
+            padding:0px;
+            margin:0px;
+          }
         `}
       </style>
     </div>
@@ -196,6 +233,14 @@ export default function Home() {
             .payment-text {
               text-align: left;
               margin: 0 0 15px;
+            }
+            body {
+              padding: 0px;
+              margin:0px;
+            }
+            html {
+              padding:0px;
+              margin:0px;
             }
           `}
         </style>
