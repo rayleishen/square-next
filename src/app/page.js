@@ -32,8 +32,12 @@ export default function Home() {
     email: "",
     phone: "",
     address: "",
+    city: "",
+    province: "",
+    zip: "",
+    country: "",
     quantity: 1,
-  });
+  });  
 
   const [warningMessage, setWarningMessage] = useState('');
 
@@ -45,9 +49,19 @@ export default function Home() {
 
   // Check if all fields are filled out
   const areFieldsFilled = () => {
-    return orderDetails.name && orderDetails.email && orderDetails.phone && orderDetails.address && orderDetails.quantity; // Add more conditions if there are more fields
+    return (
+      orderDetails.name &&
+      orderDetails.email &&
+      orderDetails.phone &&
+      orderDetails.address &&
+      orderDetails.city &&
+      orderDetails.province &&
+      orderDetails.zip &&
+      orderDetails.country &&
+      orderDetails.quantity
+    );
   };
-
+  
   const calculateCharge = (quantity) => Math.round(6.99 * quantity * 100);
 
   const handleSubmitOrder = async () => {
@@ -66,9 +80,10 @@ export default function Home() {
   };
 
   const renderOrderDetails = () => (
-    <div style={{ backgroundColor: '#f0f0f0', height: '100vh' }}>
+    <div style={{ backgroundColor: '#f0f0f0', minHeight: '100vh', height: 'auto' }}>
       <img src="/images/SecondSavour_Banner.png" alt="Logo" style={{ minWidth: '100%', maxWidth: '100%', height: 'auto' }} />
       <h2 className="order-header">Order Details</h2>
+      <h3 className="order-subheader">*lower mainland only</h3>
       <form className="order-form">
         <div className="form-group">
           <label>Name:</label>
@@ -101,12 +116,52 @@ export default function Home() {
           />
         </div>
         <div className="form-group">
-          <label>Address:</label>
+          <label>Street Address:</label>
           <input
             type="text"
             value={orderDetails.address}
             onChange={(e) =>
               setOrderDetails({ ...orderDetails, address: e.target.value })
+            }
+          />
+        </div>
+        <div className="form-group">
+          <label>City:</label>
+          <input
+            type="text"
+            value={orderDetails.city}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, city: e.target.value })
+            }
+          />
+        </div>
+        <div className="form-group">
+          <label>Province:</label>
+          <input
+            type="text"
+            value={orderDetails.province}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, province: e.target.value })
+            }
+          />
+        </div>
+        <div className="form-group">
+          <label>Postal/ZIP Code:</label>
+          <input
+            type="text"
+            value={orderDetails.zip}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, zip: e.target.value })
+            }
+          />
+        </div>
+        <div className="form-group">
+          <label>Country:</label>
+          <input
+            type="text"
+            value={orderDetails.country}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, country: e.target.value })
             }
           />
         </div>
@@ -145,6 +200,7 @@ export default function Home() {
             cursor: "pointer", // Pointer cursor on hover
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Subtle shadow
             transition: "background-color 0.3s ease", // Smooth color transition
+            marginBottom: "200px",
           }}
           onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")} // Darker blue on hover
           onMouseOut={(e) => (e.target.style.backgroundColor = "#007BFF")} // Original color on mouse out
@@ -157,7 +213,12 @@ export default function Home() {
         {`
           .order-header {
             max-width: 800px;
-            margin: 40px auto 20px; /* Added 40px top margin */
+            margin: 40px auto 10px; /* Added 40px top margin */
+            text-align: center;
+          }
+          .order-subheader {
+            max-width: 800px;
+            margin: 10px auto 40px; /* Added 40px top margin */
             text-align: center;
           }
           .order-form {
@@ -198,7 +259,8 @@ export default function Home() {
 
     const rawAmount = parseFloat(totalPrice)
     const taxAmount = (totalPrice * 0.05).toFixed(2); // Calculate 5% tax
-    const finalPrice = (rawAmount + parseFloat(taxAmount)).toFixed(2); // Add tax to the original amount
+    const shippingAmount = 2; // Shipping cost
+    const finalPrice = (rawAmount + parseFloat(taxAmount) + shippingAmount).toFixed(2); // Add tax to the original amount
 
     return (
       <div style={{ backgroundColor: '#f0f0f0', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
@@ -208,16 +270,24 @@ export default function Home() {
             <h2 className="payment-header">Payment Details</h2>
             <p className="payment-text">Subtotal: ${rawAmount} CAD</p>
             <p className="payment-text">Tax: ${taxAmount} CAD</p>
+            <p className="payment-text">Shipping: ${shippingAmount} CAD</p>
             <p className="payment-text">Total Cost: ${finalPrice} CAD</p>
           </div>
         </div>
     
         <PaymentForm
+          //production
           applicationId="sq0idp-z69enspv1J3r73uJYyQ0Ag"
           locationId="L4XV1SXY1ECJY"
+
+          //sandbox
+          //applicationId="sandbox-sq0idb-ayXDRhsJiwimurKk9RNYcA"
+          //locationId="LXV6Q4QQXQFCT"
+
           cardTokenizeResponseReceived={async (token) => {
             const result = await submitPayment(token.token, orderDetails.quantity);
             console.log(result);
+            setStep(3);
           }}
         >
           <div style={{ maxWidth: "800px", margin: "0 auto" }}>
@@ -250,11 +320,37 @@ export default function Home() {
     
   };
   
+  const renderThankYou = () => {
+    return (
+      <div style={{ backgroundColor: '#f0f0f0', minHeight: '100vh', textAlign: 'center', padding: '20px' }}>
+        {/* Banner Image */}
+        <img 
+          src="/images/SecondSavour_Banner.png" 
+          alt="Logo" 
+          style={{ minWidth: '100%', maxWidth: '100%', height: 'auto', marginBottom: '20px' }} 
+        />
+  
+        {/* Thank You Message */}
+        <h2 style={{ color: '#333', fontSize: '28px', margin: '20px 0' }}>Thank you for your order!</h2>
+        <p style={{ color: '#555', fontSize: '18px', lineHeight: '1.6', maxWidth: '600px', margin: '0 auto' }}>
+          We’ve received your order and are processing it. You’ll receive a confirmation email shortly with the details. 
+          If you have any questions, feel free to <a href="mailto:secondsavour@enactussfu.com" style={{ color: '#007BFF' }}>contact us</a>.
+        </p>
+  
+        {/* Optional Additional Content */}
+        <p style={{ marginTop: '30px', fontSize: '16px', color: '#777' }}>
+          Explore more on our <a href="https://www.secondsavour.ca/" style={{ color: '#007BFF' }}>homepage</a>.
+        </p>
+      </div>
+    );
+  };
+  
 
   return (
     <div>
       {step === 1 && renderOrderDetails()}
       {step === 2 && renderPaymentDetails()}
+      {step === 3 && renderThankYou()}
     </div>
   );
 }

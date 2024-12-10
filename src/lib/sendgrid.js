@@ -13,7 +13,11 @@ export async function sendOrderEmail(orderDetails) {
       <p><strong>Name:</strong> ${orderDetails.name}</p>
       <p><strong>Email:</strong> ${orderDetails.email}</p>
       <p><strong>Phone:</strong> ${orderDetails.phone}</p>
-      <p><strong>Address:</strong> ${orderDetails.address}</p>
+      <p><strong>Street Address:</strong> ${orderDetails.address}</p>
+      <p><strong>City:</strong> ${orderDetails.address}</p>
+      <p><strong>Province:</strong> ${orderDetails.address}</p>
+      <p><strong>Postal/ZIP Code:</strong> ${orderDetails.zip}</p>
+      <p><strong>Country:</strong> ${orderDetails.country}</p>
       <p><strong>Quantity:</strong> ${orderDetails.quantity}</p>
     `,
   };
