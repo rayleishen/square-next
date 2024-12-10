@@ -44,8 +44,9 @@ export default function Home() {
   };
 
   const renderOrderDetails = () => (
-    <div>
-      <h2 className="order-header">Second Savour Order Details</h2>
+    <div style={{ backgroundColor: '#f0f0f0', height: '100vh' }}>
+      <img src="/images/SecondSavour_Banner.png" alt="Logo" style={{ maxWidth: '100%', height: 'auto' }} />
+      <h2 className="order-header">Order Details</h2>
       <form className="order-form">
         <div className="form-group">
           <label>Name:</label>
@@ -101,7 +102,24 @@ export default function Home() {
             }
           />
         </div>
-        <button type="button" onClick={handleSubmitOrder}>
+        <button
+          type="button"
+          onClick={handleSubmitOrder}
+          style={{
+            backgroundColor: "#007BFF", // Blue background
+            color: "#FFFFFF", // White text
+            border: "none", // Remove border
+            borderRadius: "5px", // Rounded corners
+            padding: "10px 20px", // Padding for size
+            fontSize: "16px", // Larger text
+            fontWeight: "bold", // Bold text
+            cursor: "pointer", // Pointer cursor on hover
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)", // Subtle shadow
+            transition: "background-color 0.3s ease", // Smooth color transition
+          }}
+          onMouseOver={(e) => (e.target.style.backgroundColor = "#0056b3")} // Darker blue on hover
+          onMouseOut={(e) => (e.target.style.backgroundColor = "#007BFF")} // Original color on mouse out
+        >
           Next
         </button>
       </form>
@@ -137,9 +155,6 @@ export default function Home() {
       </style>
     </div>
   );
-  
-  
-  
 
   const renderPaymentDetails = () => {
     const totalPrice = (orderDetails.quantity * 6.99).toFixed(2); // Calculate and format total price
@@ -149,11 +164,17 @@ export default function Home() {
     const finalPrice = (rawAmount + parseFloat(taxAmount)).toFixed(2); // Add tax to the original amount
 
     return (
-      <div>
-        <h2 className="payment-header">Payment Details</h2>
-        <p className="payment-text">Subtotal: ${rawAmount} CAD</p>
-        <p className="payment-text">Tax: ${taxAmount} CAD</p>
-        <p className="payment-text">Total Cost: ${finalPrice} CAD</p>
+      <div style={{ backgroundColor: '#f0f0f0', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '100%', marginBottom: '30px' }}>
+          <img src="/images/treats.png" alt="Logo" style={{ width: '40%', height: 'auto', marginRight: '20px' }} />
+          <div>
+            <h2 className="payment-header">Payment Details</h2>
+            <p className="payment-text">Subtotal: ${rawAmount} CAD</p>
+            <p className="payment-text">Tax: ${taxAmount} CAD</p>
+            <p className="payment-text">Total Cost: ${finalPrice} CAD</p>
+          </div>
+        </div>
+    
         <PaymentForm
           applicationId="sq0idp-z69enspv1J3r73uJYyQ0Ag"
           locationId="L4XV1SXY1ECJY"
@@ -170,19 +191,17 @@ export default function Home() {
         <style>
           {`
             .payment-header {
-              max-width: 800px;
-              margin: 40px auto 20px; /* Space from top and between sections */
-              text-align: center;
+              text-align: left;
             }
             .payment-text {
-              max-width: 800px;
-              margin: 0 auto 15px;
-              text-align: center;
+              text-align: left;
+              margin: 0 0 15px;
             }
           `}
         </style>
       </div>
     );
+    
     
   };
   
