@@ -95,7 +95,7 @@ export default function Home() {
     <div style={{ backgroundColor: '#f0f0f0', minHeight: '100vh', height: 'auto' }}>
       <img src="/images/SecondSavour_Banner.png" alt="Logo" style={{ minWidth: '100%', maxWidth: '100%', height: 'auto' }} />
       <h2 className="order-header">Order Details</h2>
-      <h3 className="order-subheader">*Please note that online purchases are only available for the Lower Mainland region only</h3>
+      <h3 className="order-subheader">*Please note that online purchases are only available for the Lower Mainland region</h3>
       <form className="order-form">
       <div className="form-group">
           <label>Select Quantity of Citrus Treats Packages:</label>
