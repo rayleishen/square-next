@@ -37,6 +37,12 @@ export default function Home() {
     zip: "",
     country: "",
     quantity: 1,
+    billingName: "",
+    billingAddress: "",
+    billingCity: "",
+    billingProvince: "",
+    billingZip: "",
+    billingCountry: ""
   });  
 
   const [warningMessage, setWarningMessage] = useState('');
@@ -58,7 +64,13 @@ export default function Home() {
       orderDetails.province &&
       orderDetails.zip &&
       orderDetails.country &&
-      orderDetails.quantity
+      orderDetails.quantity &&
+      orderDetails.billingName &&
+      orderDetails.billingAddress &&
+      orderDetails.billingProvince &&
+      orderDetails.billingCity &&
+      orderDetails.billingZip &&
+      orderDetails.billingCountry
     );
   };
   
@@ -83,90 +95,10 @@ export default function Home() {
     <div style={{ backgroundColor: '#f0f0f0', minHeight: '100vh', height: 'auto' }}>
       <img src="/images/SecondSavour_Banner.png" alt="Logo" style={{ minWidth: '100%', maxWidth: '100%', height: 'auto' }} />
       <h2 className="order-header">Order Details</h2>
-      <h3 className="order-subheader">*lower mainland only</h3>
+      <h3 className="order-subheader">*Please note that online purchases are only available for the Lower Mainland region only</h3>
       <form className="order-form">
-        <div className="form-group">
-          <label>Name:</label>
-          <input
-            type="text"
-            value={orderDetails.name}
-            onChange={(e) =>
-              setOrderDetails({ ...orderDetails, name: e.target.value })
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={orderDetails.email}
-            onChange={(e) =>
-              setOrderDetails({ ...orderDetails, email: e.target.value })
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>Phone:</label>
-          <input
-            type="tel"
-            value={orderDetails.phone}
-            onChange={(e) =>
-              setOrderDetails({ ...orderDetails, phone: e.target.value })
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>Street Address:</label>
-          <input
-            type="text"
-            value={orderDetails.address}
-            onChange={(e) =>
-              setOrderDetails({ ...orderDetails, address: e.target.value })
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>City:</label>
-          <input
-            type="text"
-            value={orderDetails.city}
-            onChange={(e) =>
-              setOrderDetails({ ...orderDetails, city: e.target.value })
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>Province:</label>
-          <input
-            type="text"
-            value={orderDetails.province}
-            onChange={(e) =>
-              setOrderDetails({ ...orderDetails, province: e.target.value })
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>Postal/ZIP Code:</label>
-          <input
-            type="text"
-            value={orderDetails.zip}
-            onChange={(e) =>
-              setOrderDetails({ ...orderDetails, zip: e.target.value })
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>Country:</label>
-          <input
-            type="text"
-            value={orderDetails.country}
-            onChange={(e) =>
-              setOrderDetails({ ...orderDetails, country: e.target.value })
-            }
-          />
-        </div>
-        <div className="form-group">
-          <label>Quantity:</label>
+      <div className="form-group">
+          <label>Select Quantity of Citrus Treats Packages:</label>
           <input
             type="number"
             min="1"
@@ -180,6 +112,165 @@ export default function Home() {
           />
         </div>
 
+       
+        <div className="form-group">
+          <h3>Contact Details</h3>
+          <label>Email:</label>
+          <input
+            type="email"
+            value={orderDetails.email}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, email: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="form-group">
+          <h3>Delivery</h3>
+          <label>Name:</label>
+          <input
+            type="text"
+            value={orderDetails.name}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, name: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Phone:</label>
+          <input
+            type="tel"
+            value={orderDetails.phone}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, phone: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Country:</label>
+          <input
+            type="text"
+            value={orderDetails.country}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, country: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Street Address:</label>
+          <input
+            type="text"
+            value={orderDetails.address}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, address: e.target.value })
+            }
+          />
+        </div>
+        
+          <div className="form-group">
+            <label>City:</label>
+            <input
+              type="text"
+              value={orderDetails.city}
+              onChange={(e) =>
+                setOrderDetails({ ...orderDetails, city: e.target.value })
+              }
+              style={{ width: '100%' }}
+            />
+          </div>
+          <div className="form-group">
+            <label>Province:</label>
+            <input
+              type="text"
+              value={orderDetails.province}
+              onChange={(e) =>
+                setOrderDetails({ ...orderDetails, province: e.target.value })
+              }
+              style={{ width: '100%' }}
+            />
+          </div>
+          <div className="form-group">
+            <label>Postal/ZIP Code:</label>
+            <input
+              type="text"
+              value={orderDetails.zip}
+              onChange={(e) =>
+                setOrderDetails({ ...orderDetails, zip: e.target.value })
+              }
+              style={{ width: '100%' }}
+            />
+          </div>
+
+          <div className="form-group">
+          <h3>Billing Details (card payment will be requested in the next page) </h3>
+          <label>Billing Name:</label>
+          <input
+            type="text"
+            value={orderDetails.billingName}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, billingName: e.target.value })
+            }
+          />
+        </div>
+
+          <div className="form-group">
+          <label>Billing Country:</label>
+          <input
+            type="text"
+            value={orderDetails.billingCountry}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, billingCountry: e.target.value })
+            }
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Billing Street Address:</label>
+          <input
+            type="text"
+            value={orderDetails.billingAddress}
+            onChange={(e) =>
+              setOrderDetails({ ...orderDetails, billingAddress: e.target.value })
+            }
+          />
+        </div>
+        
+          <div className="form-group">
+            <label>Billing City:</label>
+            <input
+              type="text"
+              value={orderDetails.billingCity}
+              onChange={(e) =>
+                setOrderDetails({ ...orderDetails, billingCity: e.target.value })
+              }
+              style={{ width: '100%' }}
+            />
+          </div>
+          <div className="form-group">
+            <label>Billing Province:</label>
+            <input
+              type="text"
+              value={orderDetails.billingProvince}
+              onChange={(e) =>
+                setOrderDetails({ ...orderDetails, billingProvince: e.target.value })
+              }
+              style={{ width: '100%' }}
+            />
+          </div>
+          <div className="form-group">
+            <label>Billing Postal/ZIP Code:</label>
+            <input
+              type="text"
+              value={orderDetails.billingZip}
+              onChange={(e) =>
+                setOrderDetails({ ...orderDetails, billingZip: e.target.value })
+              }
+              style={{ width: '100%' }}
+            />
+          </div>          
         
         {/* Warning message */}
         {warningMessage && <p style={{ color: 'red' }}>{warningMessage}</p>}
@@ -264,6 +355,7 @@ export default function Home() {
 
     return (
       <div style={{ backgroundColor: '#f0f0f0', height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', maxWidth: '100%', marginBottom: '30px' }}>
           <img src="/images/treats.png" alt="Logo" style={{ width: '40%', height: 'auto', marginRight: '20px' }} />
           <div>
@@ -290,7 +382,7 @@ export default function Home() {
             setStep(3);
           }}
         >
-          <div style={{ maxWidth: "800px", margin: "0 auto" }}>
+          <div style={{margin: "0 auto" }}>
             <CreditCard />
           </div>
         </PaymentForm>
