@@ -277,8 +277,8 @@ export default function Home() {
     
         <PaymentForm
           //production
-          applicationId="sq0idp-z69enspv1J3r73uJYyQ0Ag"
-          locationId="L4XV1SXY1ECJY"
+          applicationId="sq0idp-leAPDrw-4oMD6vQXYKhZWA"
+          locationId="LVYPE74W6JCDC"
 
           //sandbox
           //applicationId="sandbox-sq0idb-ayXDRhsJiwimurKk9RNYcA"

@@ -20,7 +20,7 @@ const { paymentsApi } = new Client({
 export async function submitPayment(sourceId, quantity) {
   const rawAmount = Math.round(6.99 * quantity * 100); // Calculate amount in cents
   const taxAmount = Math.round(rawAmount * 0.05); // Calculate 5% tax
-  const shippingAmount = 2;
+  const shippingAmount = 200;
   const amount = rawAmount + taxAmount + shippingAmount; // Add tax to the original amount
   
   try {
