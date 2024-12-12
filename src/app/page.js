@@ -83,7 +83,7 @@ export default function Home() {
       console.log('Form submitted');
       setWarningMessage('Please fill out all fields');
       console.log("Total amount to charge:", calculateCharge(orderDetails.quantity));
-      await sendOrderEmail(orderDetails); //< -- turn this shit off when testing
+      //await sendOrderEmail(orderDetails); //< -- turn this shit off when testing
       setStep(2);
     } else {
       // Show warning message if fields are not filled
@@ -95,7 +95,7 @@ export default function Home() {
     <div style={{ backgroundColor: '#f0f0f0', minHeight: '100vh', height: 'auto' }}>
       <img src="/images/SecondSavour_Banner.png" alt="Logo" style={{ minWidth: '100%', maxWidth: '100%', height: 'auto' }} />
       <h2 className="order-header">Order Details</h2>
-      <h3 className="order-subheader">*Please note that online purchases are only available for the Lower Mainland region only</h3>
+      <h3 className="order-subheader">*Please note that online purchases are only available for the Lower Mainland region</h3>
       <form className="order-form">
       <div className="form-group">
           <label>Select Quantity of Citrus Treats Packages:</label>
@@ -363,7 +363,9 @@ export default function Home() {
             <p className="payment-text">Subtotal: ${rawAmount} CAD</p>
             <p className="payment-text">Tax: ${taxAmount} CAD</p>
             <p className="payment-text">Shipping: ${shippingAmount} CAD</p>
-            <p className="payment-text">Total Cost: ${finalPrice} CAD</p>
+            <p className="payment-text">Total Cost: ${finalPrice} CAD <br /> <br /> </p>
+            <p className="payment-text">Upon successful payment, you will be redirected</p>
+            <p className="payment-text">Otherwise, no charges will be made</p>
           </div>
         </div>
     
