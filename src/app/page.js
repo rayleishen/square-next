@@ -83,7 +83,7 @@ export default function Home() {
       console.log('Form submitted');
       setWarningMessage('Please fill out all fields');
       console.log("Total amount to charge:", calculateCharge(orderDetails.quantity));
-      await sendOrderEmail(orderDetails); //< -- turn this shit off when testing
+      //await sendOrderEmail(orderDetails); //< -- turn this shit off when testing
       setStep(2);
     } else {
       // Show warning message if fields are not filled
@@ -363,7 +363,9 @@ export default function Home() {
             <p className="payment-text">Subtotal: ${rawAmount} CAD</p>
             <p className="payment-text">Tax: ${taxAmount} CAD</p>
             <p className="payment-text">Shipping: ${shippingAmount} CAD</p>
-            <p className="payment-text">Total Cost: ${finalPrice} CAD</p>
+            <p className="payment-text">Total Cost: ${finalPrice} CAD <br /> <br /> </p>
+            <p className="payment-text">Upon successful payment, you will be redirected</p>
+            <p className="payment-text">Otherwise, no charges will be made</p>
           </div>
         </div>
     
